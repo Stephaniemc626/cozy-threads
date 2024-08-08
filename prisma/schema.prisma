@@ -19,24 +19,32 @@ enum Category {
   ACCESSORIES
 }
 
+enum SizeEnum {
+  S
+  M
+  L
+  XL
+  ONE_SIZE
+}
 model Product {
   id          Int       @id @default(autoincrement())
   title       String
   description String
   category    Category
-  quantity    Int
+  total		    Int
   price       Float
   sizes       Size[]
   image       String
-  OrderItem   OrderItem[]
+  OrderItems   OrderItem[]
 }
 
 model Size {
   id        Int      @id @default(autoincrement())
-  name      String
+  name      SizeEnum
   quantity  Int
   productId Int
   product   Product  @relation(fields: [productId], references: [id])
+	OrderItem OrderItem[]
 }
 
 model User {
@@ -47,7 +55,6 @@ model User {
   email         String   @unique
   phone         String
   address       String
-  cardInfo      String
   orders        Order[]
 }
 
@@ -58,16 +65,18 @@ model Order {
   userId     Int
   user       User       @relation(fields: [userId], references: [id])
   OrderItem  OrderItem[]
-  totalPrice Float
+  total			 Float
 }
 
 model OrderItem {
   id        Int      @id @default(autoincrement())
   orderId   Int
   productId Int
+	sizeId    Int
   quantity  Int
   order     Order    @relation(fields: [orderId], references: [id])
   product   Product  @relation(fields: [productId], references: [id])
+	size      Size     @relation(fields: [sizeId], references: [id])
 
   @@unique([orderId, productId])
 }

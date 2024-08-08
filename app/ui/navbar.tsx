@@ -1,22 +1,22 @@
-"use client"
+'use client'
 import React, { useRef } from 'react'
 import Link from 'next/link'
 import Hamburger from './hamburgerMenu'
+import UserIcon from './userIcon'
 
 const navItems = [
+	{ name: 'Shop All', href: '/shopAll' },
 	{ name: 'Tops', href: '/tops' },
 	{ name: 'Bottoms', href: '/bottoms' },
 	{ name: 'Accessories', href: '/accessories' },
 ]
 
 export default function Navbar() {
-
 	const checkboxRef = useRef<HTMLInputElement>(null)
 
 	const handleCloseSidebar = () => {
 		if (checkboxRef.current) checkboxRef.current.checked = false
 	}
-
 
 	return (
 		<div className='drawer z-40 fixed'>
@@ -31,7 +31,7 @@ export default function Navbar() {
 			{/* Drawer Content */}
 			<div className='drawer-content flex flex-col'>
 				{/* Navbar */}
-				<div className='navbar bg-base-300 w-full flex justify-between items-center'>
+				<div className='navbar bg-white w-full flex justify-between items-center'>
 					{/* Hamburger Menu for Mobile */}
 					<div className='flex-none lg:hidden'>
 						<label
@@ -107,12 +107,7 @@ export default function Navbar() {
 								role='button'
 								className='btn btn-ghost btn-circle avatar'
 							>
-								<div className='w-10 rounded-full'>
-									<img
-										alt='User Avatar'
-										src='https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'
-									/>
-								</div>
+								<UserIcon />
 							</div>
 							<ul
 								tabIndex={0}
